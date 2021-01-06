@@ -9,22 +9,45 @@ let numeros = document.querySelector('.d-1-3')
 
 // Variaveis de controle de ambiente
 let etapaAtual = 0;
+let numero = '';
 
 function comecarEtapa() {
     //Vai limpar a tela e pegar as informações atuais
     let etapa = etapas[etapaAtual];
 
+    let numeroHtml = '';
+
+    for(let i=0;i<etapa.numeros;i++){
+        if(i == 0){
+            numeroHtml += '<div class="numero pisca"></div>';
+        }
+        numeroHtml += '<div class="numero"></div>';
+
+    } 
+
     seuVotoPara.style.display = 'none';
     cargo.innerHTML = etapa.titulo;
     descricao.innerHTML = '';
     aviso.style.display = 'none';
-    numeros.innerHTML = '';
+    lateral.innerHTML = '';
+    numeros.innerHTML = numeroHtml;
 
 
 }
 //Funções
-function clicou(numero) {
-    alert('Clicou em ' + numero);
+
+function atualizaInterface(){
+    
+}
+function clicou(n) {
+    let elNumero = document.querySelector('.numero.pisca');
+    if(elNumero !== null){
+        elNumero.innerHTML = n;
+        numero = `${numero} ${n}`;
+
+        elNumero.classList.remove('pisca');
+        elNumero.nextElementSibling.classList.add('pisca');
+    }
 } 
 
 function branco(){
@@ -38,3 +61,5 @@ function corrige(){
 function confirma(){
     alert('Clicou em CONFIRMAR')
 }
+
+comecarEtapa();
